@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Myform</title>
+
+	<style type="text/css">
+		.container {
+			height: 50%;
+		}
+
+		.label {
+			float: left;
+			width: 150px;
+		}
+
+		.infobox {
+			width: 400px;
+			text-align: center;
+			align-items: center;
+		}
+
+		.error {
+			color: red;
+			padding-left: 20px;
+		}
+
+		.submit {
+			margin-left: 150px;
+			margin-top: 10px;
+			width: 400px;
+			height: 20px;
+			border-radius: 20px;
+			background-color: crimson;
+		}
+
+		option {
+			background-color: salmon;
+			color: white;
+		}
+
+		.choice {
+			background-color: cyan;
+			color: blue;
+		}
+
+		.result {
+			color: green;
+			font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		}
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script>
+		$(document).ready(function () { //untuk menganalisa atau mendeteksi apakah DOM pada halaman HTML web kita sudah siap digunakan
+			$('.error').hide(); 		//error yaitu nama kelas pada html dengan kondisi hide terlebih dahulu
+			$('option:odd').addClass('choice'); //untuk menampilkan dan mengaktifkan style css pada kelas choice yang khusus di poisi odd atau ganjil
+			$('.submit').click(function (event) { //sebagai fungsi untuk tombol submit
+				var selectedopts = ""; // mendeklarasikan untuk ditampilkan apa yang dipilih 
+				var count = $('select option:selected').val(); // jumlah  apa yang dipilih dari option
+				if (count == 0) { // jika kondisi tidak memilih alias==0
+					$('p.result').hide(); //maka hasil tidak dimunculkan atau tidak ada
+					$('.error').show(); // error dimunculkan karena tidak memilih
+				}
+				else {
+					$('select option:selected').each(function () { //  each yang bisa kita gunakan untuk mencari suatu elemen atau pengulangan 
+						selectedopts += $(this).text() + ","; //menyetel atau mengembalikan konten teks dari elemen yang dipilih dengan tanda + karena dimungkinkan untuk multiple pilihan
+					});
+					$('.error').hide(); // maka error di sembunyikan karena telah dipilih dari item
+					$('p.result').show();// hasil dimunculkan atau ditampilkan
+					$('p.result').text('You have selected ' + selectedopts); // menampilkan dalam bentuk text pilihan yang dipilih dari dari item
+				}
+				event.preventDefault(); // metode menghentikan event default suatu elemen terjadi
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="container">
+		<form>
+			<span class="label">Pilih item minuman</span>
+			<select id="drinks" class="infobox" MULTIPLE>
+				<option value="0" selected="0">Pilih item Coffe</option>
+				<option value="KopiHitam">KopiHitam Rp30.000</option>
+				<option value="KopiAceh">KopiAceh Rp50.000</option>
+				<option value="KopiRobuta">KopiRobusta Rp25.0000</option>
+				<option value="KopiEs">KopiEs Rp15.0000</option>
+			</select>
+
+			<p class="error">Anda belum memilih item coffe</p>
+			<p class="result"></p>
+			<input class="submit" type="submit" value="Submit">
+		</form>
+	</div>
+
+</body>
+</body>
+
+</html>
